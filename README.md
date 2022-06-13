@@ -1,5 +1,3 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/6cdty27qa6rl9x78?svg=true)](https://ci.appveyor.com/project/Crazyhell13/qa-diploma)
-
 ## Дипломная работа профессии Тестировщик
 
 Дипломный проект представляет собой автоматизацию тестирования комплексного сервиса, взаимодействующего с СУБД и API Банка.
