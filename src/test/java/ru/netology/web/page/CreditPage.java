@@ -4,14 +4,14 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import ru.netology.web.data.CardInfo;
 
-
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
-public class PaymentPage {
+public class CreditPage {
     private final SelenideElement cardNumberField = $(".input [placeholder='0000 0000 0000 0000']");
     private final SelenideElement monthField = $(".input [placeholder='08']");
     private final SelenideElement yearField = $(".input [placeholder='22']");
@@ -39,3 +39,4 @@ public class PaymentPage {
         errorNotification.shouldBe(Condition.visible, Duration.ofSeconds(15));
     }
 }
+
