@@ -49,7 +49,7 @@ public class MonthFieldTest {
                 "APPROVED",
                 "doubleZero",
                 "future",
-                "validName",
+                "valid",
                 "random")
         );
         messageCardMonthField.shouldHave(exactText("Неверный формат"));
