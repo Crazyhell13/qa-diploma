@@ -10,12 +10,10 @@
 - 30 для оплаты по кредитной карте.
 
 ### Из которых:
-- Успешных:27 (45%)    
-- Не успешных:33 (55%)
+- Успешных:33   
+- Не успешных:28 
 
-  [![img_3.png](img_3.png)](http://localhost:63342/DiplomaQA/build/reports/allure-report/allureReport/index.html?_ijt=4fql2cnuorp56sljdtqdbioqlk&_ij_reload=RELOAD_ON_SAVE#)
-
-   
+![image](https://user-images.githubusercontent.com/89997099/173885520-af71888c-7b54-45ad-8ba9-c49fe03244fc.png)
 
 ### В Github заведены следующие баг-репорты:
 1) [Неверное информационное сообщение при оплате картой со статусом "DECLINED"](https://github.com/Crazyhell13/qa-diploma/issues/1);
