@@ -12,8 +12,8 @@ public class DashboardPage {
         paymentGate.click();
         return new PaymentPage();
     }
-    public PaymentPage getCreditPayment(){
+    public CreditPage getCreditPayment(){
         creditGate.click();
-        return new PaymentPage();
+        return new CreditPage();
     }
 }

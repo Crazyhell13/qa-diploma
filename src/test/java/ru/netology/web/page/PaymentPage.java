@@ -7,6 +7,7 @@ import ru.netology.web.data.CardInfo;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -34,8 +35,26 @@ public class PaymentPage {
     public void checkSuccessNotification() {
         successNotification.shouldBe(Condition.visible, Duration.ofSeconds(15));
     }
-
     public void checkErrorNotification() {
         errorNotification.shouldBe(Condition.visible, Duration.ofSeconds(15));
     }
+
+    //ERROR MESSAGES
+    private final SelenideElement messageCardNumberField = $$(".input__top").find(text("Номер карты")).parent().$(".input__sub");
+    private final SelenideElement messageCardMonthField = $$(".input__top").find(text("Месяц")).parent().$(".input__sub");
+    private final SelenideElement messageCardYearField = $$(".input__top").find(text("Год")).parent().$(".input__sub");
+    private final SelenideElement messageCardHolderField = $$(".input__top").find(text("Владелец")).parent().$(".input__sub");
+    private final SelenideElement messageCvcField = $$(".input__top").find(text("CVC/CVV")).parent().$(".input__sub");
+
+    String textMessage = new String();
+    public void checkErrorMessageCardNumberField(String textMessage)
+    {messageCardNumberField.shouldBe(Condition.visible, Duration.ofSeconds(15)).shouldHave(exactText(textMessage));}
+    public void checkErrorMessageCardMonthField(String textMessage)
+    {messageCardMonthField.shouldBe(Condition.visible, Duration.ofSeconds(15)).shouldHave(exactText(textMessage));}
+    public void checkErrorMessageCardYearField(String textMessage)
+    {messageCardYearField.shouldBe(Condition.visible, Duration.ofSeconds(15)).shouldHave(exactText(textMessage));}
+    public void checkErrorMessageCardHolderField(String textMessage)
+    {messageCardHolderField.shouldBe(Condition.visible, Duration.ofSeconds(15)).shouldHave(exactText(textMessage));}
+    public void checkErrorMessageCardCvcField(String textMessage)
+    {messageCvcField.shouldBe(Condition.visible, Duration.ofSeconds(15)).shouldHave(exactText(textMessage));}
 }

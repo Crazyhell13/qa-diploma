@@ -5,7 +5,6 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import ru.netology.web.data.*;
 import ru.netology.web.page.*;
-
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static ru.netology.web.data.SQLHelper.*;
@@ -16,17 +15,14 @@ public class PositiveTest {
     void setUp() {
         open("http://localhost:8080/");
     }
-
     @BeforeAll
     static void setUpAll() {
         SelenideLogger.addListener("allure", new AllureSelenide());
     }
-
     @AfterEach
     public void cleanTables() {
         cleanData();
     }
-
     @AfterAll
     static void tearDownAll() {
         SelenideLogger.removeListener("allure");

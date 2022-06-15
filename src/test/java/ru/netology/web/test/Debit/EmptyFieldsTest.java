@@ -1,13 +1,9 @@
 package ru.netology.web.test.Debit;
-
-import com.codeborne.selenide.*;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import ru.netology.web.data.*;
 import ru.netology.web.page.*;
-
-import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static ru.netology.web.data.SQLHelper.cleanData;
@@ -33,12 +29,6 @@ public class EmptyFieldsTest {
         SelenideLogger.removeListener("allure");
     }
 
-    private final SelenideElement messageCardNumberField = $$(".input__top").find(text("Номер карты")).parent();
-    private final SelenideElement messageCardMonthField = $$(".input__top").find(text("Месяц")).parent();
-    private final SelenideElement messageCardYearField = $$(".input__top").find(text("Год")).parent();
-    private final SelenideElement messageCardHolderField = $$(".input__top").find(text("Владелец")).parent();
-    private final SelenideElement messageCvcField = $$(".input__top").find(text("CVC/CVV")).parent();
-
     @DisplayName("1.3 Buying tour by debit card - empty fields")
     @Test
     void debitBuyingEmptyFields() {
@@ -51,11 +41,11 @@ public class EmptyFieldsTest {
                 "empty",
                 "empty")
         );
-        messageCardNumberField.shouldHave(Condition.exactText("Неверный формат"));
-        messageCardMonthField.shouldHave(Condition.exactText("Неверный формат"));
-        messageCardYearField.shouldHave(Condition.exactText("Неверный формат"));
-        messageCardHolderField.shouldHave(Condition.exactText("Поле обязательно для заполнения"));
-        messageCvcField.shouldHave(Condition.exactText("Неверный формат"));
+        paymentPage.checkErrorMessageCardNumberField("Неверный формат");
+        paymentPage.checkErrorMessageCardMonthField("Неверный формат");
+        paymentPage.checkErrorMessageCardYearField("Неверный формат");
+        paymentPage.checkErrorMessageCardHolderField("Поле обязательно для заполнения");
+        paymentPage.checkErrorMessageCardCvcField("Неверный формат");
         assertNull(new SQLHelper().getPaymentId());
     }
 
@@ -71,7 +61,7 @@ public class EmptyFieldsTest {
                 "valid",
                 "random")
         );
-        messageCardNumberField.shouldHave(Condition.exactText("Неверный формат"));
+        paymentPage.checkErrorMessageCardNumberField("Неверный формат");
         assertNull(new SQLHelper().getPaymentId());
     }
 
@@ -81,13 +71,13 @@ public class EmptyFieldsTest {
         DashboardPage dashboardPage = new DashboardPage();
         PaymentPage paymentPage = dashboardPage.getCardPayment();
         paymentPage.fillPaymentForm(CardInfo.generateCardInfo(
-                "ACTIVE",
+                "APPROVED",
                 "empty",
                 "future",
                 "valid",
                 "random")
         );
-        messageCardMonthField.shouldHave(Condition.exactText("Неверный формат"));
+        paymentPage.checkErrorMessageCardMonthField("Неверный формат");
         assertNull(new SQLHelper().getPaymentId());
     }
 
@@ -97,13 +87,13 @@ public class EmptyFieldsTest {
         DashboardPage dashboardPage = new DashboardPage();
         PaymentPage paymentPage = dashboardPage.getCardPayment();
         paymentPage.fillPaymentForm(CardInfo.generateCardInfo(
-                "ACTIVE",
+                "APPROVED",
                 "future",
                 "empty",
                 "valid",
                 "random")
         );
-        messageCardYearField.shouldHave(Condition.exactText("Неверный формат"));
+        paymentPage.checkErrorMessageCardYearField("Неверный формат");
         assertNull(new SQLHelper().getPaymentId());
     }
 
@@ -113,13 +103,13 @@ public class EmptyFieldsTest {
         DashboardPage dashboardPage = new DashboardPage();
         PaymentPage paymentPage = dashboardPage.getCardPayment();
         paymentPage.fillPaymentForm(CardInfo.generateCardInfo(
-                "ACTIVE",
+                "APPROVED",
                 "future",
                 "future",
                 "empty",
                 "random")
         );
-        messageCardHolderField.shouldHave(Condition.exactText("Поле обязательно для заполнения"));
+        paymentPage.checkErrorMessageCardHolderField("Поле обязательно для заполнения");
         assertNull(new SQLHelper().getPaymentId());
     }
 
@@ -129,13 +119,13 @@ public class EmptyFieldsTest {
         DashboardPage dashboardPage = new DashboardPage();
         PaymentPage paymentPage = dashboardPage.getCardPayment();
         paymentPage.fillPaymentForm(CardInfo.generateCardInfo(
-                "ACTIVE",
+                "APPROVED",
                 "future",
                 "future",
                 "valid",
                 "empty")
         );
-        messageCvcField.shouldHave(Condition.exactText("Неверный формат"));
+        paymentPage.checkErrorMessageCardCvcField("Неверный формат");
         assertNull(new SQLHelper().getPaymentId());
     }
 }

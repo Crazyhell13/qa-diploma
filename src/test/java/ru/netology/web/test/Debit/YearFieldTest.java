@@ -17,23 +17,18 @@ public class YearFieldTest {
     void setUp() {
         open("http://localhost:8080/");
     }
-
     @AfterEach
     public void cleanTables() {
         cleanData();
     }
-
     @BeforeAll
     static void setUpAll() {
         SelenideLogger.addListener("allure", new AllureSelenide());
     }
-
     @AfterAll
     static void tearDownAll() {
         SelenideLogger.removeListener("allure");
     }
-
-    private final SelenideElement messageCardYearField = $$(".input__top").find(text("Год")).parent().$(".input__sub");
 
     @DisplayName("2.3.1 Buying tour by debit card - one digit in year field")
     @Test
@@ -47,7 +42,7 @@ public class YearFieldTest {
                 "valid",
                 "random")
         );
-        messageCardYearField.shouldHave(exactText("Неверный формат"));
+        paymentPage.checkErrorMessageCardYearField("Неверный формат");
         assertNull(new SQLHelper().getPaymentId());
     }
 
@@ -63,7 +58,7 @@ public class YearFieldTest {
                 "valid",
                 "random")
         );
-        messageCardYearField.shouldHave(exactText("Истёк срок действия карты"));
+        paymentPage.checkErrorMessageCardYearField("Истёк срок действия карты");
         assertNull(new SQLHelper().getPaymentId());
     }
 
@@ -79,7 +74,7 @@ public class YearFieldTest {
                 "valid",
                 "random")
         );
-        messageCardYearField.shouldHave(exactText("Неверно указан срок действия карты"));
+        paymentPage.checkErrorMessageCardYearField("Неверно указан срок действия карты");
         assertNull(new SQLHelper().getPaymentId());
     }
 }

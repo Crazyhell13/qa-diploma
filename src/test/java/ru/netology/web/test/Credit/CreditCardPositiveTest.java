@@ -3,11 +3,8 @@ package ru.netology.web.test.Credit;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
-import ru.netology.web.data.CardInfo;
-import ru.netology.web.data.SQLHelper;
-import ru.netology.web.page.DashboardPage;
-import ru.netology.web.page.PaymentPage;
-
+import ru.netology.web.data.*;
+import ru.netology.web.page.*;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -19,17 +16,14 @@ public class CreditCardPositiveTest {
     void setUp() {
         open("http://localhost:8080/");
     }
-
     @BeforeAll
     static void setUpAll() {
         SelenideLogger.addListener("allure", new AllureSelenide());
     }
-
     @AfterEach
     public void cleanTables() {
         cleanData();
     }
-
     @AfterAll
     static void tearDownAll() {
         SelenideLogger.removeListener("allure");
@@ -39,15 +33,15 @@ public class CreditCardPositiveTest {
     @Test
     void creditBuyingByApprovedCard() {
         DashboardPage dashboardPage = new DashboardPage();
-        PaymentPage paymentPage = dashboardPage.getCreditPayment();
-        paymentPage.fillPaymentForm(CardInfo.generateCardInfo(
+        CreditPage creditPage = dashboardPage.getCreditPayment();
+        creditPage.fillPaymentForm(CardInfo.generateCardInfo(
                 "APPROVED",
                 "future",
                 "future",
                 "valid",
                 "random")
         );
-        paymentPage.checkSuccessNotification();
+        creditPage.checkSuccessNotification();
         assertEquals("APPROVED", new SQLHelper().getCreditRequestStatus());
         assertNotNull(new SQLHelper().getCreditId());
     }
@@ -56,15 +50,15 @@ public class CreditCardPositiveTest {
     @Test
     void creditBuyingByApprovedCardCurrentMonth() {
         DashboardPage dashboardPage = new DashboardPage();
-        PaymentPage paymentPage = dashboardPage.getCreditPayment();
-        paymentPage.fillPaymentForm(CardInfo.generateCardInfo(
+        CreditPage creditPage = dashboardPage.getCreditPayment();
+        creditPage.fillPaymentForm(CardInfo.generateCardInfo(
                 "APPROVED",
                 "current",
                 "current",
                 "valid",
                 "random")
         );
-        paymentPage.checkSuccessNotification();
+        creditPage.checkSuccessNotification();
         assertEquals("APPROVED", new SQLHelper().getCreditRequestStatus());
         assertNotNull(new SQLHelper().getCreditId());
     }
@@ -73,15 +67,15 @@ public class CreditCardPositiveTest {
     @Test
     void creditBuyingByDeclinedCard() {
         DashboardPage dashboardPage = new DashboardPage();
-        PaymentPage paymentPage = dashboardPage.getCreditPayment();
-        paymentPage.fillPaymentForm(CardInfo.generateCardInfo(
+        CreditPage creditPage = dashboardPage.getCreditPayment();
+        creditPage.fillPaymentForm(CardInfo.generateCardInfo(
                 "DECLINED",
                 "future",
                 "future",
                 "valid",
                 "random")
         );
-        paymentPage.checkErrorNotification();
+        creditPage.checkErrorNotification();
         assertEquals("DECLINED", new SQLHelper().getCreditRequestStatus());
         assertNotNull(new SQLHelper().getCreditId());
     }
@@ -90,15 +84,15 @@ public class CreditCardPositiveTest {
     @Test
     void creditBuyingByDeclinedCardCurrentMonth() {
         DashboardPage dashboardPage = new DashboardPage();
-        PaymentPage paymentPage = dashboardPage.getCreditPayment();
-        paymentPage.fillPaymentForm(CardInfo.generateCardInfo(
+        CreditPage creditPage = dashboardPage.getCreditPayment();
+        creditPage.fillPaymentForm(CardInfo.generateCardInfo(
                 "DECLINED",
                 "current",
                 "current",
                 "valid",
                 "random")
         );
-        paymentPage.checkErrorNotification();
+        creditPage.checkErrorNotification();
         assertEquals("DECLINED", new SQLHelper().getCreditRequestStatus());
         assertNotNull(new SQLHelper().getCreditId());
     }

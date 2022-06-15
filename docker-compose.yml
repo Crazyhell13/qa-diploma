@@ -19,6 +19,7 @@ services:
       - POSTGRES_PASSWORD=pass
   node:
     image: node:8
+
     user: node
     working_dir: /home/node/app
     environment:

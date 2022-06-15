@@ -38,8 +38,6 @@ public class MonthFieldTest {
         SelenideLogger.removeListener("allure");
     }
 
-    private final SelenideElement messageCardMonthField = $$(".input__top").find(text("Месяц")).parent().$(".input__sub");
-
     @DisplayName("2.2.1 Buying tour by debit card - zero's in months field")
     @Test
     void debitBuyingZeroMonth() {
@@ -52,7 +50,7 @@ public class MonthFieldTest {
                 "valid",
                 "random")
         );
-        messageCardMonthField.shouldHave(exactText("Неверный формат"));
+        paymentPage.checkErrorMessageCardMonthField("Неверный формат");
         assertNull(new SQLHelper().getPaymentId());
     }
 
@@ -68,7 +66,7 @@ public class MonthFieldTest {
                 "valid",
                 "random")
         );
-        messageCardMonthField.shouldHave(exactText("Неверно указан срок действия карты"));
+        paymentPage.checkErrorMessageCardMonthField("Неверно указан срок действия карты");
         assertNull(new SQLHelper().getPaymentId());
     }
 
@@ -84,7 +82,7 @@ public class MonthFieldTest {
                 "valid",
                 "random")
         );
-        messageCardMonthField.shouldHave(exactText("Неверный формат"));
+        paymentPage.checkErrorMessageCardMonthField("Неверный формат");
         assertNull(new SQLHelper().getPaymentId());
     }
 
@@ -100,7 +98,7 @@ public class MonthFieldTest {
                 "valid",
                 "random")
         );
-        messageCardMonthField.shouldHave(exactText("Истёк срок действия карты"));
+        paymentPage.checkErrorMessageCardMonthField("Истёк срок действия карты");
         assertNull(new SQLHelper().getPaymentId());
     }
 

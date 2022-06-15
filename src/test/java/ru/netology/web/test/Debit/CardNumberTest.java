@@ -37,8 +37,6 @@ public class CardNumberTest {
         SelenideLogger.removeListener("allure");
     }
 
-    private final SelenideElement messageCardNumberField = $$(".input__top").find(text("Номер карты")).parent().$(".input__sub");
-
     @DisplayName("2.1.1 Buying tour by debit card - one digit in card number field")
     @Test
     void debitBuyingOneDigitNumber() {
@@ -51,7 +49,7 @@ public class CardNumberTest {
                 "valid",
                 "random")
         );
-        messageCardNumberField.shouldHave(exactText("Неверный формат"));
+        paymentPage.checkErrorMessageCardNumberField("Неверный формат");
         assertNull(new SQLHelper().getPaymentId());
     }
 
@@ -67,7 +65,7 @@ public class CardNumberTest {
                 "valid",
                 "random")
         );
-        messageCardNumberField.shouldHave(exactText("Неверный формат"));
+        paymentPage.checkErrorMessageCardNumberField("Неверный формат");
         assertNull(new SQLHelper().getPaymentId());
     }
 
@@ -83,7 +81,7 @@ public class CardNumberTest {
                 "valid",
                 "random")
         );
-        messageCardNumberField.shouldHave(exactText("Неверный формат"));
+        paymentPage.checkErrorMessageCardNumberField("Неверный формат");
         assertNull(new SQLHelper().getPaymentId());
     }
 
@@ -99,7 +97,7 @@ public class CardNumberTest {
                 "valid",
                 "random")
         );
-        messageCardNumberField.shouldHave(exactText("Неверный формат"));
+        paymentPage.checkErrorMessageCardNumberField("Неверный формат");
         assertNull(new SQLHelper().getPaymentId());
     }
 }
