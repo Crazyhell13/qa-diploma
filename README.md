@@ -35,6 +35,6 @@
 #### Документация:
 
 1) [План автоматизации](https://github.com/Crazyhell13/qa-diploma/blob/1432f21ad8162731475de2e82e0ed7dd15c6ecc4/documentation/Plan.md)
-2) [Отчет о тестировании]()
-3) [Отчет по итогам автоматизации]()
+2) [Отчет о тестировании](https://github.com/Crazyhell13/qa-diploma/blob/master/documentation/Report.md)
+3) [Отчет по итогам автоматизации](https://github.com/Crazyhell13/qa-diploma/blob/master/documentation/Summary.md)
 
